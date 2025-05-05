@@ -2,52 +2,40 @@
 
 namespace app\controllers;
 
+use app\models\VigenereEncoder;
 use yii\web\Controller;
 
 class IndexController extends Controller
 {
-    public function actionEncode(string $key, string $text): string
+    public function actionLab2Encode(string $key = null, string $text = null): string
     {
-        $firstLetterCode = mb_ord('a');
-        $lastLetterCode = mb_ord('z');
-        $keyChar = array_map(fn ($char) => mb_ord($char) - $firstLetterCode, str_split($key));
-        $keyLength = strlen($key);
-        $textChars = str_split($text, $keyLength);
-        $result = '';
-        foreach ($textChars as $textChar) {
-            $textChar = str_split($textChar);
-            foreach ($textChar as $j => $char) {
-                if (($newCharCode = mb_ord($char) + $keyChar[$j]) <= $lastLetterCode) {
-                    $newChar = mb_chr($newCharCode);
-                } else {
-                    $newChar = mb_chr($newCharCode - 26);
-                }
-                $result .= $newChar;
-            }
+        if ($key && $text) {
+            $model = new VigenereEncoder([
+                'key' => $key,
+                'text' => $text,
+            ]);
+            $encoded = $model->encode();
         }
 
-        return $result;
+        return $this->render('lab2-encode', [
+            'model' => $model ?? null,
+            'encoded' => $encoded ?? null,
+        ]);
     }
 
-    public function actionDecode(string $key, string $text): string
+    public function actionLab2Decode(string $key = null, string $text = null): string
     {
-        $firstLetterCode = mb_ord('a');
-        $keyChar = array_map(fn ($char) => mb_ord($char) - $firstLetterCode, str_split($key));
-        $keyLength = strlen($key);
-        $textChars = str_split($text, $keyLength);
-        $result = '';
-        foreach ($textChars as $textChar) {
-            $textChar = str_split($textChar);
-            foreach ($textChar as $j => $char) {
-                if (($newCharCode = mb_ord($char) - $keyChar[$j]) >= $firstLetterCode) {
-                    $newChar = mb_chr($newCharCode);
-                } else {
-                    $newChar = mb_chr($newCharCode + 26);
-                }
-                $result .= $newChar;
-            }
+        if ($key && $text) {
+            $model = new VigenereEncoder([
+                'key' => $key,
+                'text' => $text,
+            ]);
+            $encoded = $model->decode();
         }
 
-        return $result;
+        return $this->render('lab2-decode', [
+            'model' => $model ?? null,
+            'encoded' => $encoded ?? null,
+        ]);
     }
 }
