@@ -4,17 +4,18 @@ namespace app\models;
 
 use yii\base\Model;
 
-class VigenereEncoder extends Model
+class Lab3Model extends Model
 {
     public string $key;
-    public string $text;
-    public function encode(): string
+    public ?string $encoded = null;
+    public ?string $decoded = null;
+    public function encode(): void
     {
         $firstLetterCode = mb_ord('a');
         $lastLetterCode = mb_ord('z');
         $keyChar = array_map(fn ($char) => mb_ord($char) - $firstLetterCode, str_split($this->key));
         $keyLength = strlen($this->key);
-        $textChars = str_split($this->text, $keyLength);
+        $textChars = str_split($this->decoded, $keyLength);
         $result = '';
         foreach ($textChars as $textChar) {
             $textChar = str_split($textChar);
@@ -28,15 +29,15 @@ class VigenereEncoder extends Model
             }
         }
 
-        return $result;
+        $this->encoded = $result;
     }
 
-    public function decode()
+    public function decode(): void
     {
         $firstLetterCode = mb_ord('a');
         $keyChar = array_map(fn ($char) => mb_ord($char) - $firstLetterCode, str_split($this->key));
         $keyLength = strlen($this->key);
-        $textChars = str_split($this->text, $keyLength);
+        $textChars = str_split($this->encoded, $keyLength);
         $result = '';
         foreach ($textChars as $textChar) {
             $textChar = str_split($textChar);
@@ -50,6 +51,6 @@ class VigenereEncoder extends Model
             }
         }
 
-        return $result;
+        $this->decoded = $result;
     }
 }

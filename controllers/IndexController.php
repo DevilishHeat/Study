@@ -2,40 +2,40 @@
 
 namespace app\controllers;
 
-use app\models\VigenereEncoder;
+use app\models\Lab3Model;
+use Yii;
 use yii\web\Controller;
 
 class IndexController extends Controller
 {
-    public function actionLab2Encode(string $key = null, string $text = null): string
+
+    public function actionLab3()
     {
-        if ($key && $text) {
-            $model = new VigenereEncoder([
-                'key' => $key,
-                'text' => $text,
-            ]);
-            $encoded = $model->encode();
+        $model = new Lab3Model();
+        if (Yii::$app->request->post()) {
+            $model->load(Yii::$app->request->post());
+            $model->encode();
         }
 
-        return $this->render('lab2-encode', [
-            'model' => $model ?? null,
-            'encoded' => $encoded ?? null,
+        return $this->render('lab3', [
+            'model' => $model,
+            'encoded' => $model->encoded,
+            'decoded' => $model->decoded,
         ]);
     }
 
-    public function actionLab2Decode(string $key = null, string $text = null): string
+    public function actionLab3Decode(): string
     {
-        if ($key && $text) {
-            $model = new VigenereEncoder([
-                'key' => $key,
-                'text' => $text,
-            ]);
-            $encoded = $model->decode();
+        $model = new Lab3Model();
+        if (Yii::$app->request->post()) {
+            $model->load(Yii::$app->request->post());
+            $model->decode();
         }
 
-        return $this->render('lab2-decode', [
-            'model' => $model ?? null,
-            'encoded' => $encoded ?? null,
+        return $this->render('lab3', [
+            'model' => $model,
+            'encoded' => $model->encoded,
+            'decoded' => $model->decoded,
         ]);
     }
 }
