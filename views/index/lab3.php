@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
         'action' => ['lab3'],
         'method' => 'post',
     ]); ?>
-    <div class="col-6">
+    <div class="col-5">
         <?= $encodeForm->field($model, 'key')->textInput()->label('Ключ') ?>
         <?= $encodeForm->field($model, 'decoded')->textInput()->label('Текст') ?>
         <?= Html::submitButton('Закодировать', ['class' => 'btn btn-primary']) ?>
@@ -27,7 +27,7 @@ use yii\widgets\ActiveForm;
         'action' => ['lab3-decode'],
         'method' => 'post',
     ]); ?>
-    <div class="col-6">
+    <div class="col-5">
         <?= $encodeForm->field($model, 'key')->textInput()->label('Ключ') ?>
         <?= $encodeForm->field($model, 'encoded')->textInput()->label('Текст') ?>
         <?= Html::submitButton('Раскодировать', ['class' => 'btn btn-primary']) ?>
