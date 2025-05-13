@@ -40,7 +40,7 @@ class Lab3Model extends Model
 
     public function decode(): void
     {
-        $firstLetterCode = mb_ord('a');
+        $firstLetterCode = mb_ord(' ');
         $keyChar = array_map(fn ($char) => mb_ord($char) - $firstLetterCode, str_split($this->key));
         $keyLength = strlen($this->key);
         $textChunks = str_split($this->encoded, $keyLength);
