@@ -13,7 +13,7 @@ class IndexController extends Controller
     public function actionLab3()
     {
         $model = new Lab3Model();
-        if ($model->load(Yii::$app->request->post(), 'Lab3Model')) {
+        if ($model->load(Yii::$app->request->post('Lab3Model'))) {
             $model->encode();
         }
 
@@ -27,7 +27,7 @@ class IndexController extends Controller
     public function actionLab3Decode(): string
     {
         $model = new Lab3Model();
-        if ($model->load(Yii::$app->request->post(), 'Lab3Model')) {
+        if ($model->load(Yii::$app->request->post('Lab3Model'))) {
             $model->decode();
         }
 
