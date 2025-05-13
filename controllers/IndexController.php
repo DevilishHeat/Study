@@ -14,6 +14,7 @@ class IndexController extends Controller
     {
         $model = new Lab3Model();
         VarDumper::dump(Yii::$app->request->post());
+        exit();
         if ($model->load(Yii::$app->request->post())) {
             $model->encode();
         }
