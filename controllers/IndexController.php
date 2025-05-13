@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Lab3Model;
 use Yii;
+use yii\helpers\VarDumper;
 use yii\web\Controller;
 
 class IndexController extends Controller
@@ -12,8 +13,8 @@ class IndexController extends Controller
     public function actionLab3()
     {
         $model = new Lab3Model();
-        if (Yii::$app->request->post()) {
-            $model->load(Yii::$app->request->post());
+        VarDumper::dump(Yii::$app->request->post());
+        if ($model->load(Yii::$app->request->post())) {
             $model->encode();
         }
 
@@ -27,8 +28,7 @@ class IndexController extends Controller
     public function actionLab3Decode(): string
     {
         $model = new Lab3Model();
-        if (Yii::$app->request->post()) {
-            $model->load(Yii::$app->request->post());
+        if ($model->load(Yii::$app->request->post())) {
             $model->decode();
         }
 
