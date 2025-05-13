@@ -12,7 +12,7 @@ class Lab3Model extends Model
     public ?string $decoded = null;
     public function encode(): void
     {
-        $firstLetterCode = mb_ord('a');
+        $firstLetterCode = mb_ord(' ');
         $lastLetterCode = mb_ord('z');
         $keyChar = array_map(fn ($char) => mb_ord($char) - $firstLetterCode, str_split($this->key));
         $keyLength = strlen($this->key);
