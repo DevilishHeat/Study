@@ -39,7 +39,7 @@ class Lab3Model extends Model
             }
         }
 
-        $this->encoded = mb_convert_encoding($result, 'UTF-8');
+        $this->encoded = mb_convert_encoding($result, mb_detect_encoding($this->key));
     }
 
     public function decode(): void
@@ -58,6 +58,6 @@ class Lab3Model extends Model
             }
         }
 
-        $this->decoded = mb_convert_encoding($result, 'UTF-8');
+        $this->decoded = mb_convert_encoding($result, mb_detect_encoding($this->key));
     }
 }
