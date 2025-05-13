@@ -10,6 +10,14 @@ class Lab3Model extends Model
     public ?string $key = null;
     public ?string $encoded = null;
     public ?string $decoded = null;
+
+    public function init()
+    {
+        $this->key = mb_convert_encoding($this->key, 'ASCII');
+        $this->decoded = mb_convert_encoding($this->decoded, 'ASCII');
+        $this->encoded = mb_convert_encoding($this->encoded, 'ASCII');
+    }
+
     public function encode(): void
     {
         $firstLetterCode = mb_ord(' ');
