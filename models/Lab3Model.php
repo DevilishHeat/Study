@@ -18,8 +18,6 @@ class Lab3Model extends Model
         $keyLength = strlen($this->key);
         $textChunks = str_split($this->decoded, $keyLength);
         $result = '';
-        VarDumper::dump($textChunks);
-        exit();
         foreach ($textChunks as $textChunk) {
             $textChunk = str_split($textChunk);
             foreach ($textChunk as $j => $char) {
