@@ -17,9 +17,9 @@ class Lab3Model extends Model
 
     public function init()
     {
-        $this->keyASCII = mb_convert_encoding($this->key, 'ASCII');
-        $this->decodedASCII = mb_convert_encoding($this->decoded, 'ASCII');
-        $this->encodedASCII = mb_convert_encoding($this->encoded, 'ASCII');
+        $this->keyASCII = mb_convert_encoding($this->key, 'UTF-8');
+        $this->decodedASCII = mb_convert_encoding($this->decoded, 'UTF-8');
+        $this->encodedASCII = mb_convert_encoding($this->encoded, 'UTF-8');
     }
 
     public function encode(): void
