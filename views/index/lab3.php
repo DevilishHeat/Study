@@ -22,6 +22,7 @@ use yii\widgets\ActiveForm;
         <?= $encodeForm->field($model, 'decoded')->textInput() ?>
         <?= Html::submitButton('Закодировать', ['class' => 'btn btn-primary']) ?>
     </div>
+    <?php ActiveForm::end(); ?>
     <div class="col-6">
         <?php $encodeForm = ActiveForm::begin([
             'action' => ['lab3-decode'],
@@ -32,5 +33,6 @@ use yii\widgets\ActiveForm;
             <?= $encodeForm->field($model, 'encoded')->textInput() ?>
             <?= Html::submitButton('Раскодировать', ['class' => 'btn btn-primary']) ?>
         </div>
+        <?php ActiveForm::end(); ?>
     </div>
 </div>
