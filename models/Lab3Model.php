@@ -6,7 +6,7 @@ use yii\base\Model;
 
 class Lab3Model extends Model
 {
-    public string $key;
+    public ?string $key = null;
     public ?string $encoded = null;
     public ?string $decoded = null;
     public function encode(): void
