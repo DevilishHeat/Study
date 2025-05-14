@@ -10,19 +10,12 @@ class Lab3Model extends Model
     public ?string $key = null;
     public ?string $encoded = null;
     public ?string $decoded = null;
-
-    private ?string $keyASCII = null;
-    private ?string $encodedASCII = null;
-    private ?string $decodedASCII = null;
     private int $firstLetterCode;
     private int $lastLetterCode;
     private int $alphabetPower;
 
     public function init()
     {
-        $this->keyASCII = mb_convert_encoding($this->key, 'UTF-8');
-        $this->decodedASCII = mb_convert_encoding($this->decoded, 'UTF-8');
-        $this->encodedASCII = mb_convert_encoding($this->encoded, 'UTF-8');
         $this->firstLetterCode = mb_ord(' ');
         $this->lastLetterCode = mb_ord('z');
         $this->alphabetPower = $this->lastLetterCode - $this->firstLetterCode;
@@ -30,9 +23,9 @@ class Lab3Model extends Model
 
     public function encode(): void
     {
-        $keyChar = array_map(fn ($char) => mb_ord($char) - $this->firstLetterCode, str_split($this->keyASCII));
-        $keyLength = strlen($this->keyASCII);
-        $textChunks = str_split($this->decodedASCII, $keyLength);
+        $keyChar = array_map(fn ($char) => mb_ord($char) - $this->firstLetterCode, str_split($this->key));
+        $keyLength = strlen($this->key);
+        $textChunks = str_split($this->decoded, $keyLength);
         $result = '';
         foreach ($textChunks as $textChunk) {
             $textChunk = str_split($textChunk);
@@ -43,14 +36,14 @@ class Lab3Model extends Model
             }
         }
 
-        $this->encoded = mb_convert_encoding($result, mb_detect_encoding($this->key));
+        $this->encoded = $result;
     }
 
     public function decode(): void
     {
-        $keyChar = array_map(fn ($char) => mb_ord($char) - $this->firstLetterCode, str_split($this->keyASCII));
-        $keyLength = strlen($this->keyASCII);
-        $textChunks = str_split($this->encodedASCII, $keyLength);
+        $keyChar = array_map(fn ($char) => mb_ord($char) - $this->firstLetterCode, str_split($this->key));
+        $keyLength = strlen($this->key);
+        $textChunks = str_split($this->encoded, $keyLength);
         $result = '';
         foreach ($textChunks as $textChunk) {
             $textChunk = str_split($textChunk);
@@ -61,6 +54,6 @@ class Lab3Model extends Model
             }
         }
 
-        $this->decoded = mb_convert_encoding($result, mb_detect_encoding($this->key));
+        $this->decoded = $result;
     }
 }
