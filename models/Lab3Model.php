@@ -23,7 +23,7 @@ class Lab3Model extends Model
 
     public function encode(): void
     {
-        $keyChars = array_map(fn ($char) => mb_ord($char) - $this->firstLetterCode, mb_str_split($this->key));
+        $keyChars = array_map(fn ($char) => mb_ord($char) - $this->firstLetterCode + 1, mb_str_split($this->key));
         $keyLength = mb_strlen($this->key);
         $textChunks = mb_str_split($this->decoded, $keyLength);
         $result = '';
@@ -41,7 +41,7 @@ class Lab3Model extends Model
 
     public function decode(): void
     {
-        $keyChars = array_map(fn ($char) => mb_ord($char) - $this->firstLetterCode, mb_str_split($this->key));
+        $keyChars = array_map(fn ($char) => mb_ord($char) - $this->firstLetterCode + 1, mb_str_split($this->key));
         $keyLength = mb_strlen($this->key);
         $textChunks = mb_str_split($this->encoded, $keyLength);
         $result = '';
