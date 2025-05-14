@@ -49,7 +49,7 @@ class Lab3Model extends Model
             $textChunk = mb_str_split($textChunk);
             foreach ($textChunk as $j => $char) {
                 $newCharCode = mb_ord($char) - $keyChars[$j];
-                $newChar = $newCharCode >= $this->firstLetterCode ? mb_chr($newCharCode) : mb_chr($newCharCode + $this->alphabetPower - 1);
+                $newChar = $newCharCode >= $this->firstLetterCode ? mb_chr($newCharCode) : mb_chr($newCharCode + $this->alphabetPower);
                 $result .= $newChar;
             }
         }
