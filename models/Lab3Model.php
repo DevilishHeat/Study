@@ -16,7 +16,7 @@ class Lab3Model extends Model
 
     public function init()
     {
-        $this->firstLetterCode = mb_ord(' ');
+        $this->firstLetterCode = mb_ord('а');
         $this->lastLetterCode = mb_ord('я');
         $this->alphabetPower = $this->lastLetterCode - $this->firstLetterCode;
     }
