@@ -23,14 +23,14 @@ class Lab3Model extends Model
 
     public function encode(): void
     {
-        $keyChar = array_map(fn ($char) => mb_ord($char) - $this->firstLetterCode, str_split($this->key));
-        $keyLength = strlen($this->key);
-        $textChunks = str_split($this->decoded, $keyLength);
+        $keyChars = array_map(fn ($char) => mb_ord($char) - $this->firstLetterCode, mb_str_split($this->key));
+        $keyLength = mb_strlen($this->key);
+        $textChunks = mb_str_split($this->decoded, $keyLength);
         $result = '';
         foreach ($textChunks as $textChunk) {
-            $textChunk = str_split($textChunk);
+            $textChunk = mb_str_split($textChunk);
             foreach ($textChunk as $j => $char) {
-                $newCharCode = mb_ord($char) + $keyChar[$j];
+                $newCharCode = mb_ord($char) + $keyChars[$j];
                 $newChar = $newCharCode <= $this->lastLetterCode ? mb_chr($newCharCode) : mb_chr($newCharCode - $this->alphabetPower);
                 $result .= $newChar;
             }
@@ -41,14 +41,14 @@ class Lab3Model extends Model
 
     public function decode(): void
     {
-        $keyChar = array_map(fn ($char) => mb_ord($char) - $this->firstLetterCode, str_split($this->key));
-        $keyLength = strlen($this->key);
-        $textChunks = str_split($this->encoded, $keyLength);
+        $keyChars = array_map(fn ($char) => mb_ord($char) - $this->firstLetterCode, mb_str_split($this->key));
+        $keyLength = mb_strlen($this->key);
+        $textChunks = mb_str_split($this->encoded, $keyLength);
         $result = '';
         foreach ($textChunks as $textChunk) {
-            $textChunk = str_split($textChunk);
+            $textChunk = mb_str_split($textChunk);
             foreach ($textChunk as $j => $char) {
-                $newCharCode = mb_ord($char) - $keyChar[$j];
+                $newCharCode = mb_ord($char) - $keyChars[$j];
                 $newChar = $newCharCode >= $this->firstLetterCode ? mb_chr($newCharCode) : mb_chr($newCharCode + $this->alphabetPower);
                 $result .= $newChar;
             }
