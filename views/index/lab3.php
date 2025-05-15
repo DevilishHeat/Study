@@ -22,9 +22,6 @@ use yii\widgets\ActiveForm;
         <?= $encodeForm->field($model, 'decoded')->textInput()->label('Текст') ?>
         <?= Html::submitButton('Зашифровать', ['class' => 'btn btn-primary']) ?>
         <?php ActiveForm::end(); ?>
-        <div>
-            Закодированный текст: <?= $model->encoded ?>
-        </div>
     </div>
     <div class="col-5">
         <?php $decodedForm = ActiveForm::begin([
@@ -35,8 +32,5 @@ use yii\widgets\ActiveForm;
         <?= $decodedForm->field($model, 'encoded')->textInput()->label('Текст') ?>
         <?= Html::submitButton('Расшифровать', ['class' => 'btn btn-primary']) ?>
         <?php ActiveForm::end(); ?>
-        <div>
-            Раскодированный текст: <?= $model->decoded ?>
-        </div>
     </div>
 </div>
