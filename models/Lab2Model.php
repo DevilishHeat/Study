@@ -36,7 +36,7 @@ class Lab2Model extends Model
         $letters = mb_str_split($this->encoded);
         $result = '';
         foreach ($letters as $letter) {
-            $newChar = mb_chr($this->alphabetPower - mb_ord($letter) + 1);
+            $newChar = mb_chr($this->lastLetterCode - mb_ord($letter)  + $this->firstLetterCode);
             $result .= $newChar;
         }
 
