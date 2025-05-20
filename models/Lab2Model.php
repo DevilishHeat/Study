@@ -13,7 +13,7 @@ class Lab2Model extends Model
 
     public function init()
     {
-        $this->firstLetterCode = mb_ord('А');
+        $this->firstLetterCode = mb_ord('а');
         $this->lastLetterCode = mb_ord('я');
     }
 
