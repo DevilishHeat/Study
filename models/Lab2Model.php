@@ -10,13 +10,11 @@ class Lab2Model extends Model
     public ?string $decoded = null;
     private int $firstLetterCode;
     private int $lastLetterCode;
-    private int $alphabetPower;
 
     public function init()
     {
-        $this->firstLetterCode = mb_ord('а');
+        $this->firstLetterCode = mb_ord('А');
         $this->lastLetterCode = mb_ord('я');
-        $this->alphabetPower = $this->lastLetterCode - $this->firstLetterCode;
     }
 
     public function encode(): void
