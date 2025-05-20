@@ -18,7 +18,7 @@ class Lab3Model extends Model
     {
         $this->firstLetterCode = mb_ord('а');
         $this->lastLetterCode = mb_ord('я');
-        $this->alphabetPower = $this->lastLetterCode - $this->firstLetterCode;
+        $this->alphabetPower = $this->lastLetterCode - $this->firstLetterCode + 1;
     }
 
     public function encode(): void
