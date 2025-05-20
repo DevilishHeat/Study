@@ -1,11 +1,11 @@
 <?php
 
-use app\models\Lab3Model;
+use app\models\Lab2Model;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 /**
- * @var Lab3Model $model
+ * @var Lab2Model $model
  */
 
 ?>
@@ -16,7 +16,6 @@ use yii\widgets\ActiveForm;
             'action' => ['lab3'],
             'method' => 'post',
         ]); ?>
-        <?= $encodeForm->field($model, 'key')->textInput()->label('Ключ') ?>
         <?= $encodeForm->field($model, 'decoded')->textInput()->label('Текст') ?>
         <?= Html::submitButton('Зашифровать', ['class' => 'btn btn-primary']) ?>
         <?php ActiveForm::end(); ?>
@@ -26,9 +25,9 @@ use yii\widgets\ActiveForm;
             'action' => ['lab3-decode'],
             'method' => 'post',
         ]); ?>
-        <?= $decodedForm->field($model, 'key')->textInput()->label('Ключ') ?>
         <?= $decodedForm->field($model, 'encoded')->textInput()->label('Текст') ?>
         <?= Html::submitButton('Расшифровать', ['class' => 'btn btn-primary']) ?>
         <?php ActiveForm::end(); ?>
     </div>
 </div>
+

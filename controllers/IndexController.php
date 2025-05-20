@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Lab2Model;
 use app\models\Lab3Model;
 use Yii;
 use yii\helpers\VarDumper;
@@ -20,8 +21,6 @@ class IndexController extends Controller
 
         return $this->render('lab3', [
             'model' => $model,
-            'encoded' => $model->encoded,
-            'decoded' => $model->decoded,
         ]);
     }
 
@@ -35,8 +34,32 @@ class IndexController extends Controller
 
         return $this->render('lab3', [
             'model' => $model,
-            'encoded' => $model->encoded,
-            'decoded' => $model->decoded,
+        ]);
+    }
+
+    public function actionLab2()
+    {
+        $model = new Lab2Model(Yii::$app->request->post('Lab2Model') ?? []);
+
+        if ($model->decoded) {
+            $model->encode();
+        }
+
+        return $this->render('lab2', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionLab2Decode()
+    {
+        $model = new Lab2Model(Yii::$app->request->post('Lab2Model') ?? []);
+
+        if ($model->encoded) {
+            $model->decode();
+        }
+
+        return $this->render('lab2', [
+            'model' => $model,
         ]);
     }
 }
