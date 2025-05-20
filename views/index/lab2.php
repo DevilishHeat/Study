@@ -13,7 +13,7 @@ use yii\widgets\ActiveForm;
 <div class="row">
     <div class="col-5">
         <?php $encodeForm = ActiveForm::begin([
-            'action' => ['lab3'],
+            'action' => ['lab2'],
             'method' => 'post',
         ]); ?>
         <?= $encodeForm->field($model, 'decoded')->textInput()->label('Текст') ?>
@@ -22,7 +22,7 @@ use yii\widgets\ActiveForm;
     </div>
     <div class="col-5">
         <?php $decodedForm = ActiveForm::begin([
-            'action' => ['lab3-decode'],
+            'action' => ['lab2-decode'],
             'method' => 'post',
         ]); ?>
         <?= $decodedForm->field($model, 'encoded')->textInput()->label('Текст') ?>
