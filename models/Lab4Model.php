@@ -47,8 +47,8 @@ class Lab4Model extends Model
         asort($this->squire);
 
         $result = '';
-        foreach ($this->squire as $item) {
-            $result .= $letters[$item] ?? '.';
+        foreach ($this->squire as $index => $item) {
+            $result .= $letters[$index] ?? '.';
         }
 
         $this->decoded = $result;
