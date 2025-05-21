@@ -48,7 +48,7 @@ class Lab4Model extends Model
 
         $result = '';
         foreach ($this->squire as $index => $item) {
-            $result .= $letters[$index] ?? '.';
+            $result .= $letters[$index] ?? '';
         }
 
         $this->decoded = $result;
