@@ -48,8 +48,8 @@ class Lab4Model extends Model
         $letters = mb_str_split($this->decoded);
 
         $result = '';
-        foreach ($letters as $index => $letter) {
-            $result .= $this->squireIndexes[$index] ?? '.';
+        foreach ($this->squireIndexes as $item) {
+            $result .= $letters[$item - 1] ?? '.';
         }
 
         $this->encoded = $result;
