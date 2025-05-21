@@ -15,8 +15,8 @@ class Lab4Model extends Model
     private ?array $squireIndexes = null;
     private ?int $numberOfElements = null;
 
-    public ?string $decoded;
-    public ?string $encoded;
+    public ?string $decoded = null;
+    public ?string $encoded = null;
 
     public function rules()
     {
