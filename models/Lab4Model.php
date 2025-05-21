@@ -45,13 +45,13 @@ class Lab4Model extends Model
 
     public function decode(): void
     {
-        $letters = mb_str_split($this->decoded);
+        $letters = mb_str_split($this->encoded, true);
 
         $result = '';
         foreach ($this->squireIndexes as $item) {
             $result .= $letters[$item - 1] ?? '.';
         }
 
-        $this->encoded = $result;
+        $this->decoded = $result;
     }
 }
