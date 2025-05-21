@@ -12,7 +12,6 @@ class Lab4Model extends Model
         9, 6, 7, 12,
         4, 15, 14, 1,
     ];
-    private ?array $squireIndexes = null;
     private ?int $numberOfElements = null;
 
     public ?string $decoded = null;
@@ -27,7 +26,6 @@ class Lab4Model extends Model
 
     public function init()
     {
-        $this->squireIndexes = array_flip($this->squire);
         $this->numberOfElements = count($this->squire);
     }
 
@@ -46,10 +44,11 @@ class Lab4Model extends Model
     public function decode(): void
     {
         $letters = mb_str_split($this->encoded, true);
+        asort($this->squire);
 
         $result = '';
-        foreach ($this->squireIndexes as $item) {
-            $result .= $letters[$item - 1] ?? '.';
+        foreach ($this->squire as $item) {
+            $result .= $letters[$item] ?? '.';
         }
 
         $this->decoded = $result;
