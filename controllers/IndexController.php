@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Lab2Model;
 use app\models\Lab3Model;
+use app\models\Lab4Model;
 use Yii;
 use yii\helpers\VarDumper;
 use yii\web\Controller;
@@ -59,6 +60,33 @@ class IndexController extends Controller
         }
 
         return $this->render('lab2', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionLab4()
+    {
+        $model = new Lab4Model(Yii::$app->request->post('Lab4Model') ?? []);
+
+        if ($model->decoded && $model->validate()) {
+            $model->encode();
+        }
+
+        return $this->render('lab4', [
+            'model' => $model,
+        ]);
+    }
+
+
+    public function actionLab4Decode()
+    {
+        $model = new Lab4Model(Yii::$app->request->post('Lab4Model') ?? []);
+
+        if ($model->encoded) {
+            $model->decode();
+        }
+
+        return $this->render('lab4', [
             'model' => $model,
         ]);
     }
