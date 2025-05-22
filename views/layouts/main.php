@@ -42,6 +42,8 @@ $this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii
             ['label' => 'Lab2', 'url' => ['/index/lab2']],
             ['label' => 'Lab3', 'url' => ['/index/lab3']],
             ['label' => 'Lab4', 'url' => ['/index/lab4']],
+            ['label' => 'Lab6', 'url' => ['/index/lab6']],
+            ['label' => 'Lab8', 'url' => ['/index/lab8']],
         ]
     ]);
     NavBar::end();
