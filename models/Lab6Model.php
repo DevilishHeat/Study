@@ -16,6 +16,7 @@ class Lab6Model extends Model
 
     public function calcFrequency(): void
     {
+        $this->text = mb_strtolower($this->text);
         $letters = mb_str_split($this->text);
 
         foreach ($letters as $letter) {
@@ -30,6 +31,7 @@ class Lab6Model extends Model
 
     public function calcEncodedFrequency()
     {
+        $this->encodedText = mb_strtolower($this->encodedText);
         $letters = mb_str_split($this->encodedText);
 
         foreach ($letters as $letter) {
