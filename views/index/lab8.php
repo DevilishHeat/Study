@@ -12,12 +12,12 @@ use yii\widgets\ActiveForm;
 
 <div class="row">
     <div class="col-5">
-        <?php $encodeForm = ActiveForm::begin([
+        <?php $keysForm = ActiveForm::begin([
             'action' => ['lab8'],
             'method' => 'post',
         ]); ?>
-        <?= $encodeForm->field($model, 'p')->textInput() ?>
-        <?= $encodeForm->field($model, 'q')->textInput() ?>
+        <?= $keysForm->field($model, 'p')->textInput() ?>
+        <?= $keysForm->field($model, 'q')->textInput() ?>
         <?= Html::submitButton('Сгенерировать ключи', ['class' => 'btn btn-primary']) ?>
         <?php ActiveForm::end(); ?>
     </div>

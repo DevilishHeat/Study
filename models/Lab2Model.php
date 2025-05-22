@@ -4,6 +4,9 @@ namespace app\models;
 
 use yii\base\Model;
 
+/**
+ * Шифр Атбаш
+ */
 class Lab2Model extends Model
 {
     public ?string $encoded = null;
