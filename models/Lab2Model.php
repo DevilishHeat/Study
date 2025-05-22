@@ -17,6 +17,13 @@ class Lab2Model extends Model
         $this->lastLetterCode = mb_ord('я');
     }
 
+    public function rules()
+    {
+        return [
+            [['encoded', 'decoded'], 'string'],
+        ];
+    }
+
     public function encode(): void
     {
         $letters = mb_str_split($this->decoded);

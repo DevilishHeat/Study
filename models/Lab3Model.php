@@ -14,6 +14,13 @@ class Lab3Model extends Model
     private int $lastLetterCode;
     private int $alphabetPower;
 
+    public function rules()
+    {
+        return [
+            [['key', 'encoded', 'decoded'], 'string'],
+        ];
+    }
+
     public function init()
     {
         $this->firstLetterCode = mb_ord('а');

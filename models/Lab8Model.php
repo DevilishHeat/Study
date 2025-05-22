@@ -13,6 +13,18 @@ class Lab8Model extends Model
     public ?int $e = null;
     private ?int $phiN = null;
 
+    public function rules(): array
+    {
+        return [
+            [['q', 'p'], 'integer', 'min' => 1],
+            [['q', 'p'], function ($attribute) {
+                if (gmp_prob_prime($this->{$attribute}) != 2) {
+                    $this->addError($attribute, 'Число должно быть простым');
+                }
+            }]
+        ];
+    }
+
     public function generateKeys(): void
     {
         $this->n = $this->q * $this->p;

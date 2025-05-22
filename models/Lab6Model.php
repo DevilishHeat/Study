@@ -14,6 +14,13 @@ class Lab6Model extends Model
     public ?string $textToDecode = null;
     public ?string $decodedText = null;
 
+    public function rules(): array
+    {
+        return [
+            [['text', 'encodedText', 'decodedText'], 'string'],
+        ];
+    }
+
     public function init()
     {
         if (is_string($this->frequency)) {
@@ -69,7 +76,9 @@ class Lab6Model extends Model
 
     public function decode()
     {
-
+        $this->createDecodingArray();
+        $text = mb_strtolower($this->textToDecode);
+        $this->decodedText = str_replace(array_keys($this->decodingArray), array_values($this->decodingArray), $text);
     }
 
     private function deserializeFrequency(array|string|null $frequency): array

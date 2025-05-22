@@ -18,7 +18,7 @@ class IndexController extends Controller
     {
         $model = new Lab3Model(Yii::$app->request->post('Lab3Model') ?? []);
 
-        if ($model->key && $model->decoded) {
+        if ($model->validate() && $model->key && $model->decoded) {
             $model->encode();
         }
 
@@ -31,7 +31,7 @@ class IndexController extends Controller
     {
         $model = new Lab3Model(Yii::$app->request->post('Lab3Model') ?? []);
 
-        if ($model->key && $model->encoded) {
+        if ($model->validate() && $model->key && $model->encoded) {
             $model->decode();
         }
 
@@ -44,7 +44,7 @@ class IndexController extends Controller
     {
         $model = new Lab2Model(Yii::$app->request->post('Lab2Model') ?? []);
 
-        if ($model->decoded) {
+        if ($model->validate() && $model->decoded) {
             $model->encode();
         }
 
@@ -57,7 +57,7 @@ class IndexController extends Controller
     {
         $model = new Lab2Model(Yii::$app->request->post('Lab2Model') ?? []);
 
-        if ($model->encoded) {
+        if ($model->validate() && $model->encoded) {
             $model->decode();
         }
 
@@ -70,7 +70,7 @@ class IndexController extends Controller
     {
         $model = new Lab4Model(Yii::$app->request->post('Lab4Model') ?? []);
 
-        if ($model->decoded && $model->validate()) {
+        if ($model->validate() && $model->decoded) {
             $model->encode();
         }
 
@@ -84,7 +84,7 @@ class IndexController extends Controller
     {
         $model = new Lab4Model(Yii::$app->request->post('Lab4Model') ?? []);
 
-        if ($model->encoded) {
+        if ($model->validate() && $model->encoded) {
             $model->decode();
         }
 
@@ -97,7 +97,7 @@ class IndexController extends Controller
     {
         $model = new Lab6Model(Yii::$app->request->post('Lab6Model') ?? []);
 
-        if ($model->text) {
+        if ($model->validate() && $model->text) {
             $model->frequency = $model->calcFrequency($model->text);
         }
 
@@ -110,7 +110,7 @@ class IndexController extends Controller
     {
         $model = new Lab6Model(Yii::$app->request->post('Lab6Model') ?? []);
 
-        if ($model->encodedText) {
+        if ($model->validate() && $model->encodedText) {
             $model->encodedFrequency = $model->calcFrequency($model->encodedText);
         }
 
@@ -123,7 +123,7 @@ class IndexController extends Controller
     {
         $model = new Lab6Model(Yii::$app->request->post('Lab6Model') ?? []);
 
-        if ($model->textToDecode) {
+        if ($model->validate() && $model->textToDecode) {
             $model->decode();
         }
 
@@ -136,7 +136,7 @@ class IndexController extends Controller
     {
         $model = new Lab8Model(Yii::$app->request->post('Lab8Model') ?? []);
 
-        if ($model->q && $model->p) {
+        if ($model->validate() && $model->q && $model->p) {
             $model->generateKeys();
         }
 
