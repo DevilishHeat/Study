@@ -69,7 +69,7 @@ class Lab6Model extends Model
     {
         $frequency = array_flip($this->frequency);
         $encodedFrequency = array_flip($this->encodedFrequency);
-        for ($i = 1; $i < min($encodedFrequency, $frequency); $i++) {
+        for ($i = 1; $i < min(count($encodedFrequency), count($frequency)); $i++) {
             $this->decodingArray[array_shift($encodedFrequency)] = array_shift($frequency);
         }
     }
