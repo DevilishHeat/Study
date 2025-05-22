@@ -78,7 +78,14 @@ class Lab6Model extends Model
     {
         $this->createDecodingArray();
         $text = mb_strtolower($this->textToDecode);
-        $this->decodedText = str_replace(array_keys($this->decodingArray), array_values($this->decodingArray), $text);
+        $letters = mb_str_split($text);
+        $result = '';
+
+        foreach ($letters as $letter) {
+            $result .= $this->decodingArray[$letter] ?? '&';
+        }
+
+        $this->decodedText = $result;
     }
 
     private function deserializeFrequency(array|string|null $frequency): array
