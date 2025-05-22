@@ -82,7 +82,7 @@ class Lab6Model extends Model
         $result = '';
 
         foreach ($letters as $letter) {
-            $result .= $this->decodingArray[$letter] ?? '&';
+            $result .= $this->decodingArray[$letter] ?? ' ';
         }
 
         $this->decodedText = $result;
