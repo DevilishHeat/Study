@@ -20,11 +20,13 @@ use yii\widgets\ActiveForm;
         <?= Html::submitButton('Анализ частотности', ['class' => 'btn btn-primary']) ?>
         <?php ActiveForm::end(); ?>
         <h6>Частотность</h6>
-        <?php foreach ($model->frequency as $letter => $frequency): ?>
-        <div class="col-2">
-            <?= "$letter: $frequency" ?>
+        <div class="row">
+            <?php foreach ($model->frequency as $letter => $frequency): ?>
+                <div class="col-2">
+                    <?= "$letter: $frequency" ?>
+                </div>
+            <?php endforeach; ?>
         </div>
-        <?php endforeach; ?>
     </div>
     <div class="col-12">
         <?php $encodeForm = ActiveForm::begin([
