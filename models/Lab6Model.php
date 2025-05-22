@@ -16,11 +16,11 @@ class Lab6Model extends Model
 
     public function init()
     {
-        if (is_array($this->frequency)) {
+        if (is_string($this->frequency)) {
             $this->frequency = explode(':', $this->frequency);
         }
 
-        if (is_array($this->encodedFrequency)) {
+        if (is_string($this->encodedFrequency)) {
             $this->encodedFrequency = explode(':', $this->encodedFrequency);
         }
     }
