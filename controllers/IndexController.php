@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\Lab2Model;
 use app\models\Lab3Model;
 use app\models\Lab4Model;
+use app\models\Lab8Model;
 use Yii;
 use yii\helpers\VarDumper;
 use yii\web\Controller;
@@ -87,6 +88,19 @@ class IndexController extends Controller
         }
 
         return $this->render('lab4', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionLab8()
+    {
+        $model = new Lab8Model(Yii::$app->request->post('Lab8Model') ?? []);
+
+        if ($model->q && $model->p) {
+            $model->generateKeys();
+        }
+
+        return $this->render('lab8', [
             'model' => $model,
         ]);
     }
