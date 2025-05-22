@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models\Lab2Model;
 use app\models\Lab3Model;
 use app\models\Lab4Model;
+use app\models\Lab6Model;
 use app\models\Lab8Model;
 use Yii;
 use yii\helpers\VarDumper;
@@ -88,6 +89,45 @@ class IndexController extends Controller
         }
 
         return $this->render('lab4', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionLab6()
+    {
+        $model = new Lab6Model(Yii::$app->request->post('Lab6Model') ?? []);
+
+        if ($model->text) {
+            $model->calcFrequency();
+        }
+
+        return $this->render('lab6', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionLab6EncodedFrequency()
+    {
+        $model = new Lab6Model(Yii::$app->request->post('Lab6Model') ?? []);
+
+        if ($model->encodedText) {
+            $model->calcEncodedFrequency();
+        }
+
+        return $this->render('lab6', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionLab6Decode()
+    {
+        $model = new Lab6Model(Yii::$app->request->post('Lab6Model') ?? []);
+
+        if ($model->textToDecode) {
+            $model->decode();
+        }
+
+        return $this->render('lab6', [
             'model' => $model,
         ]);
     }
