@@ -67,10 +67,10 @@ class Lab6Model extends Model
 
     private function createDecodingArray()
     {
-        $frequency = array_flip($this->frequency);
-        $encodedFrequency = array_flip($this->encodedFrequency);
-        for ($i = 1; $i < min(count($encodedFrequency), count($frequency)); $i++) {
-            $this->decodingArray[array_shift($encodedFrequency)] = array_shift($frequency);
+        $frequency = array_keys($this->frequency);
+        $encodedFrequency = array_keys($this->encodedFrequency);
+        for ($i = 0; $i < min(count($encodedFrequency), count($frequency)); $i++) {
+            $this->decodingArray[$encodedFrequency[$i]] = $frequency[$i];
         }
     }
 
