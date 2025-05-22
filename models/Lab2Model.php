@@ -29,7 +29,9 @@ class Lab2Model extends Model
 
     public function encode(): void
     {
-        $letters = mb_str_split($this->decoded);
+        $text = mb_strtolower($this->decoded);
+        $text = preg_replace("/[^а-я]+/u", "", $text);
+        $letters = mb_str_split($text);
         $result = '';
         foreach ($letters as $letter) {
             $newChar = mb_chr($this->lastLetterCode - mb_ord($letter)  + $this->firstLetterCode);
@@ -41,7 +43,9 @@ class Lab2Model extends Model
 
     public function decode(): void
     {
-        $letters = mb_str_split($this->encoded);
+        $text = mb_strtolower($this->encoded);
+        $text = preg_replace("/[^а-я]+/u", "", $text);
+        $letters = mb_str_split($text);
         $result = '';
         foreach ($letters as $letter) {
             $newChar = mb_chr($this->lastLetterCode - mb_ord($letter)  + $this->firstLetterCode);
