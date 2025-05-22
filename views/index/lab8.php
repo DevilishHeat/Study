@@ -22,7 +22,7 @@ use yii\widgets\ActiveForm;
         <?php ActiveForm::end(); ?>
     </div>
     <div class="col-5">
-        <p>Публичный ключ</p>
+        <label>Публичный ключ</label>
         <label>e</label>
         <div class="border">
             <?= $model->e ?>
@@ -31,7 +31,7 @@ use yii\widgets\ActiveForm;
         <div class="border">
             <?= $model->n ?>
         </div>
-        <p>Приватный ключ</p>
+        <label>Приватный ключ</label>
         <label>d</label>
         <div class="border">
             <?= $model->d ?>
