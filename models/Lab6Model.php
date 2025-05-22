@@ -17,6 +17,7 @@ class Lab6Model extends Model
     public function init()
     {
         if (is_string($this->frequency)) {
+            $this->frequency = [];
             $array = explode('_', $this->frequency);
             foreach ($array as $item) {
                 if (!$item) {
@@ -28,6 +29,7 @@ class Lab6Model extends Model
         }
 
         if (is_string($this->encodedFrequency)) {
+            $this->encodedFrequency = [];
             $array = explode('_', $this->encodedFrequency);
             foreach ($array as $item) {
                 if (!$item) {
