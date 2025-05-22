@@ -24,6 +24,8 @@ class Lab6Model extends Model
             }
             $this->frequency[$letter]++;
         }
+
+        ksort($this->frequency);
     }
 
     public function calcEncodedFrequency()
@@ -36,6 +38,8 @@ class Lab6Model extends Model
             }
             $this->encodedFrequency[$letter]++;
         }
+
+        ksort($this->encodedFrequency);
     }
 
     private function createDecodingArray()
