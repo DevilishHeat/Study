@@ -98,7 +98,7 @@ class IndexController extends Controller
         $model = new Lab6Model(Yii::$app->request->post('Lab6Model') ?? []);
 
         if ($model->text) {
-            $model->calcFrequency();
+            $model->frequency = $model->calcFrequency($model->text);
         }
 
         return $this->render('lab6', [
@@ -111,7 +111,7 @@ class IndexController extends Controller
         $model = new Lab6Model(Yii::$app->request->post('Lab6Model') ?? []);
 
         if ($model->encodedText) {
-            $model->calcEncodedFrequency();
+            $model->encodedFrequency = $model->calcFrequency($model->encodedText);
         }
 
         return $this->render('lab6', [

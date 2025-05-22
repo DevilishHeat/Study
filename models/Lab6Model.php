@@ -17,44 +17,59 @@ class Lab6Model extends Model
     public function init()
     {
         if (is_string($this->frequency)) {
-            $this->frequency = explode(':', $this->frequency);
+            $array = explode('_', $this->frequency);
+            foreach ($array as $item) {
+                if (!$item) {
+                    continue;
+                }
+                list($letter, $frequency) = explode('-', $item);
+                $this->frequency[$letter] = $frequency;
+            }
         }
 
         if (is_string($this->encodedFrequency)) {
-            $this->encodedFrequency = explode(':', $this->encodedFrequency);
+            $array = explode('_', $this->encodedFrequency);
+            foreach ($array as $item) {
+                if (!$item) {
+                    continue;
+                }
+                list($letter, $frequency) = explode('-', $item);
+                $this->encodedFrequency[$letter] = $frequency;
+            }
         }
     }
 
-    public function calcFrequency(): void
+    public function calcFrequency($text): array
     {
-        $text = mb_strtolower($this->text);
+        $text = mb_strtolower($text);
         $text = preg_replace("/[^а-я]+/u", "", $text);
         $letters = mb_str_split($text);
 
+        $frequency = [];
         foreach ($letters as $letter) {
-            if (!($this->frequency[$letter] ?? null)) {
-                $this->frequency[$letter] = 0;
+            if (!($frequency[$letter] ?? null)) {
+                $frequency[$letter] = 0;
             }
-            $this->frequency[$letter]++;
+            $frequency[$letter]++;
         }
 
-        ksort($this->frequency);
+        ksort($frequency);
+        return $frequency;
     }
 
-    public function calcEncodedFrequency()
+    public function serializeFrequency(array $frequency): string
     {
-        $text = mb_strtolower($this->encodedText);
-        $text = preg_replace("/[^а-я]+/u", "", $text);
-        $letters = mb_str_split($text);
-
-        foreach ($letters as $letter) {
-            if (!($this->encodedFrequency[$letter] ?? null)) {
-                $this->encodedFrequency[$letter] = 0;
-            }
-            $this->encodedFrequency[$letter]++;
+        if (!$frequency) {
+            return '';
         }
 
-        ksort($this->encodedFrequency);
+        $result = '';
+
+        foreach ($frequency as $letter => $item) {
+            $result .= "$letter-{$item}_";
+        }
+
+        return $result;
     }
 
     private function createDecodingArray()
