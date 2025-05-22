@@ -13,11 +13,11 @@ class Lab8Model extends Model
     public ?int $e = null;
     private ?int $phiN = null;
 
-    public function generateKeys()
+    public function generateKeys(): void
     {
         $this->n = $this->q * $this->p;
         $this->phiN = ($this->q - 1) * ($this->p - 1);
-        for ($i = 2; $i < $this->phiN; $i++) {
+        for ($i = $this->phiN - 1; $i >= 2; $i++) {
             if ($this->phiN % $i != 0) {
                 if (gmp_prob_prime($i, $this->phiN) == 2) {
                     $this->e = $i;
