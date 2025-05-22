@@ -17,7 +17,7 @@ class Lab8Model extends Model
     {
         $this->n = $this->q * $this->p;
         $this->phiN = ($this->q - 1) * ($this->p - 1);
-        for ($i = $this->phiN - 1; $i >= 2; $i++) {
+        for ($i = $this->phiN - 1; $i >= 2; $i--) {
             if ($this->phiN % $i != 0) {
                 if (gmp_prob_prime($i, $this->phiN) == 2) {
                     $this->e = $i;
