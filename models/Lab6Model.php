@@ -17,27 +17,11 @@ class Lab6Model extends Model
     public function init()
     {
         if (is_string($this->frequency)) {
-            $array = explode('_', $this->frequency);
-            $this->frequency = [];
-            foreach ($array as $item) {
-                if (!$item) {
-                    continue;
-                }
-                list($letter, $frequency) = explode('-', $item);
-                $this->frequency[$letter] = $frequency;
-            }
+            $this->frequency = $this->deserializeFrequency($this->frequency);
         }
 
         if (is_string($this->encodedFrequency)) {
-            $array = explode('_', $this->encodedFrequency);
-            $this->encodedFrequency = [];
-            foreach ($array as $item) {
-                if (!$item) {
-                    continue;
-                }
-                list($letter, $frequency) = explode('-', $item);
-                $this->encodedFrequency[$letter] = $frequency;
-            }
+            $this->encodedFrequency = $this->deserializeFrequency($this->encodedFrequency);
         }
     }
 
@@ -82,5 +66,20 @@ class Lab6Model extends Model
     public function decode()
     {
 
+    }
+
+    private function deserializeFrequency(array|string|null $frequency): array
+    {
+        $array = explode('_', $frequency);
+        $result = [];
+        foreach ($array as $item) {
+            if (!$item) {
+                continue;
+            }
+            list($letter, $frequency) = explode('-', $item);
+            $result[$letter] = $frequency;
+        }
+
+        return $result;
     }
 }
