@@ -17,7 +17,7 @@ class Lab6Model extends Model
     public function calcFrequency(): void
     {
         $text = mb_strtolower($this->text);
-        $text = preg_replace("/[^а-я]+/", "", $text);
+        $text = preg_replace("/[^а-я]+/u", "", $text);
         $letters = mb_str_split($text);
 
         foreach ($letters as $letter) {
@@ -33,7 +33,7 @@ class Lab6Model extends Model
     public function calcEncodedFrequency()
     {
         $text = mb_strtolower($this->encodedText);
-        $text = preg_replace("/[^а-я]+/", "", $text);
+        $text = preg_replace("/[^а-я]+/u", "", $text);
         $letters = mb_str_split($text);
 
         foreach ($letters as $letter) {
