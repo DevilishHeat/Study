@@ -15,7 +15,7 @@ class Lab8Model extends Model
 
     public function generateKeys()
     {
-        $N = $this->q * $this->p;
+        $this->n = $this->q * $this->p;
         $this->phiN = ($this->q - 1) * ($this->p - 1);
         for ($i = 2; $i < $this->phiN; $i++) {
             if ($this->phiN % $i != 0) {
