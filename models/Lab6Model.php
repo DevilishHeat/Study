@@ -39,7 +39,7 @@ class Lab6Model extends Model
             $frequency[$letter]++;
         }
 
-        ksort($frequency);
+        asort($frequency);
         return $frequency;
     }
 
