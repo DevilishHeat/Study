@@ -7,12 +7,23 @@ use yii\base\Model;
 class Lab6Model extends Model
 {
     public ?string $text = null;
-    public array $frequency = [];
+    public null|array|string $frequency = [];
     public ?string $encodedText = null;
-    public array $encodedFrequency = [];
+    public null|array|string $encodedFrequency = [];
     private array $decodingArray = [];
     public ?string $textToDecode = null;
     public ?string $decodedText = null;
+
+    public function init()
+    {
+        if (is_array($this->frequency)) {
+            $this->frequency = explode(':', $this->frequency);
+        }
+
+        if (is_array($this->encodedFrequency)) {
+            $this->encodedFrequency = explode(':', $this->encodedFrequency);
+        }
+    }
 
     public function calcFrequency(): void
     {

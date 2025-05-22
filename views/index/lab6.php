@@ -34,7 +34,7 @@ use yii\widgets\ActiveForm;
             'method' => 'post',
         ]); ?>
         <?= $encodeForm->field($model, 'encodedText')->textarea()->label('Зашифрованный текст для анализа') ?>
-        <?= $encodeForm->field($model, 'frequency')->hiddenInput(['value' => $model->frequency])->label(false) ?>
+        <?= $encodeForm->field($model, 'frequency')->hiddenInput(['value' => implode(':', $model->frequency)])->label(false) ?>
         <?= $encodeForm->field($model, 'text')->hiddenInput(['value' => $model->text])->label(false) ?>
         <?= Html::submitButton('Анализ частотности', ['class' => 'btn btn-primary']) ?>
         <?php ActiveForm::end(); ?>
@@ -53,9 +53,9 @@ use yii\widgets\ActiveForm;
             'method' => 'post',
         ]); ?>
         <?= $encodeForm->field($model, 'textToDecode')->textarea()->label('Зашифрованный текст') ?>
-        <?= $encodeForm->field($model, 'frequency')->hiddenInput(['value' => $model->frequency])->label(false) ?>
+        <?= $encodeForm->field($model, 'frequency')->hiddenInput(['value' => implode(':', $model->frequency)])->label(false) ?>
         <?= $encodeForm->field($model, 'text')->hiddenInput(['value' => $model->text])->label(false) ?>
-        <?= $encodeForm->field($model, 'encodedFrequency')->hiddenInput(['value' => $model->encodedFrequency])->label(false) ?>
+        <?= $encodeForm->field($model, 'encodedFrequency')->hiddenInput(['value' => implode(':', $model->encodedFrequency)])->label(false) ?>
         <?= $encodeForm->field($model, 'encodedText')->hiddenInput(['value' => $model->encodedText])->label(false) ?>
         <?= Html::submitButton('Расшифровать', ['class' => 'btn btn-primary']) ?>
         <?php ActiveForm::end(); ?>
