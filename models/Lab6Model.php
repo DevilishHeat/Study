@@ -16,12 +16,26 @@ class Lab6Model extends Model
 
     public function calcFrequency(): void
     {
+        $letters = mb_str_split($this->text);
 
+        foreach ($letters as $letter) {
+            if (!($this->frequency[$letter] ?? null)) {
+                $this->frequency[$letter] = 0;
+            }
+            $this->frequency[$letter]++;
+        }
     }
 
     public function calcEncodedFrequency()
     {
+        $letters = mb_str_split($this->encodedText);
 
+        foreach ($letters as $letter) {
+            if (!($this->encodedFrequency[$letter] ?? null)) {
+                $this->encodedFrequency[$letter] = 0;
+            }
+            $this->encodedFrequency[$letter]++;
+        }
     }
 
     private function createDecodingArray()
