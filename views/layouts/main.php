@@ -1,66 +1,119 @@
 <?php
 
-/** @var yii\web\View $this */
-/** @var string $content */
+/**
+ * @var string $content
+ * @var View $this
+ */
 
-use app\assets\AppAsset;
-use app\widgets\Alert;
-use yii\bootstrap5\Breadcrumbs;
-use yii\bootstrap5\Html;
-use yii\bootstrap5\Nav;
-use yii\bootstrap5\NavBar;
+use yii\helpers\Html;
+use yii\web\View;
+use yii\widgets\Breadcrumbs;
 
-AppAsset::register($this);
+$this->registerAssetBundle('app\assets\AppAsset');
+/** @noinspection JSDeprecatedSymbols */
+$jsText = <<<JS
+    $(".nav.side-menu > li > a").click(function(e){
+        if($(this).parent().children('ul').length > 0){
+            e.preventDefault();
+            return false;
+        }
+    })
+    
+    $(document).on('select2:open', () => {
+        document.querySelector('.select2-container--open .select2-search__field').focus();
+    });
+JS;
 
-$this->registerCsrfMetaTags();
-$this->registerMetaTag(['charset' => Yii::$app->charset], 'charset');
-$this->registerMetaTag(['name' => 'viewport', 'content' => 'width=device-width, initial-scale=1, shrink-to-fit=no']);
-$this->registerMetaTag(['name' => 'description', 'content' => $this->params['meta_description'] ?? '']);
-$this->registerMetaTag(['name' => 'keywords', 'content' => $this->params['meta_keywords'] ?? '']);
-$this->registerLinkTag(['rel' => 'icon', 'type' => 'image/x-icon', 'href' => Yii::getAlias('@web/favicon.ico')]);
+$this->registerJs($jsText, View::POS_READY);
+
+$css = <<< CSS
+    .nav.side-menu > li.active > a {
+        background: #152935;
+    }
+    .right-nav-block>li:not(:first-child) {
+        padding-left: 20px;
+    }
+    @media (max-width: 550px) {
+        .right-nav-block>li:not(:first-child) {
+          padding-left: 0;
+        }
+    }
+CSS;
+
+$this->registerCss($css);
+
+$style = <<<CSS
+    .left_col, .nav_title , #support-link{
+        background: cornflowerblue;
+    }
+    .nav.side-menu > li.active > a {
+        background: cornflowerblue;
+    }
+    
+CSS;
+
+$this->registerCss($style);
+
 ?>
-<?php $this->beginPage() ?>
+<?php $this->beginPage(); ?>
 <!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>" class="h-100">
+<html lang="<?= Yii::$app->language ?>">
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta charset="<?= Yii::$app->charset ?>"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
 </head>
-<body class="d-flex flex-column h-100">
-<?php $this->beginBody() ?>
+<?php $this->beginBody(); ?>
+<div class="container body">
+    <div class="main_container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="left_col scroll-view">
+                    <!-- sidebar menu -->
+                    <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+                        <div class="menu_section">
+                            <ul>
+                                <li>
+                                    <a href="/students">Студенты</a>
+                                </li>
+                            </ul>
+                        </div>
 
-<header id="header">
-    <?php
-    NavBar::begin([
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => ['class' => 'navbar-expand-md navbar-dark bg-dark fixed-top']
-    ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav'],
-        'items' => [
-            ['label' => 'Lab2', 'url' => ['/index/lab2']],
-            ['label' => 'Lab3', 'url' => ['/index/lab3']],
-            ['label' => 'Lab4', 'url' => ['/index/lab4']],
-            ['label' => 'Lab6', 'url' => ['/index/lab6']],
-            ['label' => 'Lab8', 'url' => ['/index/lab8']],
-        ]
-    ]);
-    NavBar::end();
-    ?>
-</header>
+                    </div>
+                </div>
+            </div>
 
-<main id="main" class="flex-shrink-0" role="main">
-    <div class="container">
-        <?php if (!empty($this->params['breadcrumbs'])): ?>
-            <?= Breadcrumbs::widget(['links' => $this->params['breadcrumbs']]) ?>
-        <?php endif ?>
-        <?= Alert::widget() ?>
-        <?= $content ?>
+            <!-- page content -->
+            <div class="col-md-9 right_col" role="main">
+
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h1><?= Html::encode($this->title) ?></h1>
+                        <?= Breadcrumbs::widget([
+                                'links' => $this->params['breadcrumbs'] ?? [],
+                        ]); ?>
+                    </div>
+                    <div class="x_content">
+                        <?= $content ?>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</main>
+</div>
 
-<?php $this->endBody() ?>
+<div id="custom_notifications" class="custom-notifications dsp_none">
+    <ul class="list-unstyled notifications clearfix" data-tabbed_notifications="notif-group">
+    </ul>
+    <div class="clearfix"></div>
+    <div id="notif-group" class="tabbed_notifications"></div>
+</div>
+<!-- /footer content -->
+<?php $this->endBody(); ?>
 </body>
 </html>
-<?php $this->endPage() ?>
+<?php $this->endPage(); ?>
