@@ -1,5 +1,7 @@
 <?php
 
+use yii\db\mssql\Schema;
+
 return [
     'class' => 'yii\db\Connection',
     'dsn' => 'mysql:host=localhost;dbname=study_practice',
@@ -9,7 +11,4 @@ return [
     'enableSchemaCache' => true,
     'schemaCacheDuration' => 3600,
     'schemaCache' => 'cache',
-    'schemaMap' => [
-        'mysql'=>'console\common\db\Schema'
-    ]
 ];

@@ -59,10 +59,6 @@ $this->registerCss($style);
 <!DOCTYPE html>
 <html lang="<?= Yii::$app->language ?>">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <meta charset="<?= Yii::$app->charset ?>"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -80,6 +76,12 @@ $this->registerCss($style);
                                 <li>
                                     <a href="/students">Студенты</a>
                                 </li>
+                                <li>
+                                    <a href="/specialisation">Специальности</a>
+                                </li>
+                                <li>
+                                    <a href="/group">Группы</a>
+                                </li>
                             </ul>
                         </div>
 
@@ -93,9 +95,6 @@ $this->registerCss($style);
                 <div class="x_panel">
                     <div class="x_title">
                         <h1><?= Html::encode($this->title) ?></h1>
-                        <?= Breadcrumbs::widget([
-                                'links' => $this->params['breadcrumbs'] ?? [],
-                        ]); ?>
                     </div>
                     <div class="x_content">
                         <?= $content ?>

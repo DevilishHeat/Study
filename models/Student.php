@@ -15,6 +15,11 @@ use yii\db\ActiveRecord;
  */
 class Student extends ActiveRecord
 {
+    public static function tableName()
+    {
+        return 'student';
+    }
+
     public function rules()
     {
         return [

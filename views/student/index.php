@@ -1,22 +1,33 @@
 <?php
 
-use yii\data\ArrayDataProvider;
+use app\models\searchModels\StudentSearch;
+use yii\data\ActiveDataProvider;
 use yii\grid\GridView;
+use yii\web\View;
 
-$this->title = Yii::t('app', 'Offers');
-$this->params['breadcrumbs'][] = $this->title;
+/**
+ * @var View $this
+ * @var ActiveDataProvider $dataProvider
+ * @var StudentSearch $searchModel
+
+ */
+
+$this->title = 'Студенты';
 ?>
-
+<div class="row">
+    <div class="col-md-3">
+        <a class="btn btn-primary" href="/student/create">Добавить</a>
+    </div>
+</div>
+<div class="row">
 <?= GridView::widget([
-    'dataProvider' => new ArrayDataProvider([
-        'allModels' => [
-            ['id' => 1, 'fio' => 'John Doe', 'phone' => '1234567890'],
-            ['id' => 2, 'fio' => 'Jane Doe', 'phone' => '0987654321'],
-        ],
-    ]),
+    'dataProvider' => $dataProvider,
+    'filterModel' => $searchModel,
     'columns' => [
         'id',
         'fio',
-        'phone'
+        'phone',
+        ['class' => 'yii\grid\ActionColumn'],
     ],
 ]); ?>
+</div>
