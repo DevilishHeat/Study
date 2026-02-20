@@ -9,9 +9,26 @@ use yii\db\ActiveRecord;
  * @property string $fio
  * @property string $phone
  * @property string $position
+ * @property int $faculty_id
  */
 class Employee extends ActiveRecord
 {
+    public static function tableName()
+    {
+        return 'employee';
+    }
+
+
+    public function rules()
+    {
+        return [
+            [['fio', 'phone', 'position', 'faculty_id'], 'required'],
+            [['faculty_id'], 'integer'],
+            [['fio'], 'string', 'max' => 255],
+            [['phone'], 'string', 'max' => 11],
+        ];
+    }
+
     public function attributeLabels()
     {
         return [
@@ -19,6 +36,7 @@ class Employee extends ActiveRecord
             'fio' => 'ФИО',
             'phone' => 'Телефон',
             'position' => 'Должность',
+            'faculty_id' => 'Факультет',
         ];
     }
 }
