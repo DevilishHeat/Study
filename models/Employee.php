@@ -10,6 +10,8 @@ use yii\db\ActiveRecord;
  * @property string $phone
  * @property string $position
  * @property int $faculty_id
+ *
+ * @property Faculty $faculty
  */
 class Employee extends ActiveRecord
 {
@@ -39,4 +41,9 @@ class Employee extends ActiveRecord
             'faculty_id' => 'Факультет',
         ];
     }
+    public function getFaculty()
+    {
+        return $this->hasOne(Faculty::class, ['id' => 'faculty_id']);
+    }
+
 }

@@ -12,7 +12,9 @@ class m260219_060526_create_table_group extends Migration
         $this->createTable('group', [
             'id' => $this->primaryKey(),
             'number' => $this->string()->notNull(),
-            'specialisation' => $this->integer()->notNull(),
+            'specialisation_id' => $this->integer()->notNull(),
+            'start_date' => $this->string()->notNull(),
+            'faculty_id' => $this->integer()->notNull(),
         ]);
     }
 

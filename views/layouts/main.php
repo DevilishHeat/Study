@@ -11,43 +11,13 @@ use yii\widgets\Breadcrumbs;
 
 $this->registerAssetBundle('app\assets\AppAsset');
 /** @noinspection JSDeprecatedSymbols */
-$jsText = <<<JS
-    $(".nav.side-menu > li > a").click(function(e){
-        if($(this).parent().children('ul').length > 0){
-            e.preventDefault();
-            return false;
-        }
-    })
-    
-    $(document).on('select2:open', () => {
-        document.querySelector('.select2-container--open .select2-search__field').focus();
-    });
-JS;
-
-$this->registerJs($jsText, View::POS_READY);
-
-$css = <<< CSS
-    .nav.side-menu > li.active > a {
-        background: #152935;
-    }
-    .right-nav-block>li:not(:first-child) {
-        padding-left: 20px;
-    }
-    @media (max-width: 550px) {
-        .right-nav-block>li:not(:first-child) {
-          padding-left: 0;
-        }
-    }
-CSS;
-
-$this->registerCss($css);
 
 $style = <<<CSS
-    .left_col, .nav_title , #support-link{
-        background: cornflowerblue;
-    }
-    .nav.side-menu > li.active > a {
-        background: cornflowerblue;
+    .menu-item{
+        border: 3px solid cornflowerblue;
+        border-radius: 5px;
+        padding: 5px;
+        margin: 3px;
     }
     
 CSS;
@@ -73,13 +43,16 @@ $this->registerCss($style);
                     <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                         <div class="menu_section">
                             <ul>
-                                <li>
-                                    <a href="/students">Студенты</a>
+                                <li class="menu-item">
+                                    <a href="/student">Студенты</a>
                                 </li>
-                                <li>
-                                    <a href="/specialisation">Специальности</a>
+                                <li class="menu-item">
+                                    <a href="/specialisation">Направления</a>
                                 </li>
-                                <li>
+                                <li class="menu-item">
+                                    <a href="/faculty">Факультеты</a>
+                                </li>
+                                <li class="menu-item">
                                     <a href="/group">Группы</a>
                                 </li>
                             </ul>

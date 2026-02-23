@@ -47,7 +47,13 @@ class StudentController extends Controller
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
-        return $this->render('form', ['model' => $model]);
+        $groupList = ArrayHelper::map(Group::find()->all(), 'id', 'number');
+        $paymentTypeList = PaymentTypeEnum::getList();
+        return $this->render('form', [
+            'model' => $model,
+            'groupList' => $groupList,
+            'paymentTypeList' => $paymentTypeList,
+        ]);
     }
 
     public function actionDelete($id)

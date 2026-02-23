@@ -1,5 +1,6 @@
 <?php
 
+use app\models\enums\PaymentTypeEnum;
 use app\models\Student;
 use yii\web\View;
 use yii\widgets\DetailView;
@@ -17,8 +18,8 @@ $this->title = $model->fio;
         'attributes' => [
             'fio',
             'phone',
-            'group_id',
-            'payment_type_id',
+            'group_id' => ['label' => 'Группа', 'value' => $model->group->number],
+            'payment_type_id' => ['label' => 'Тип оплаты', 'value' => PaymentTypeEnum::getList()[$model->payment_type_id]],
         ],
     ]) ?>
 </div>

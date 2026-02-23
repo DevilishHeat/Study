@@ -29,8 +29,13 @@ $form = ActiveForm::begin();
                 'pluginOptions' => ['allowClear' => false],
             ]); ?>
     </div>
-
-
+    <div class="col-md-12">
+        <?= $form->field($model, 'faculty_id')->widget(Select2::class, [
+                'data' => $facultyList,
+                'options' => ['placeholder' => 'Выберите факультет'],
+                'pluginOptions' => ['allowClear' => false],
+        ]); ?>
+    </div>
     <div class="col-md-12">
         <?= Html::submitButton($model->isNewRecord ? 'Создать' : 'Сохранить', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

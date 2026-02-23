@@ -11,11 +11,11 @@ use yii\web\View;
  * @var SpecialisationSearch $searchModel
  */
 
-$this->title = 'Направления';
+$this->title = 'Факультеты';
 ?>
 <div class="row">
     <div class="col-md-3">
-        <a class="btn btn-primary" href="/specialisation/create">Добавить</a>
+        <a class="btn btn-primary" href="/faculty/create">Добавить</a>
     </div>
 </div>
 <div class="row">
@@ -24,7 +24,6 @@ $this->title = 'Направления';
         'filterModel' => $searchModel,
         'columns' => [
             'name',
-            'code',
             [
                 'class' => 'yii\grid\ActionColumn',
             ],

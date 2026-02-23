@@ -19,10 +19,11 @@ $this->title = $model->number;
         <?= DetailView::widget([
             'model' => $model,
             'attributes' => [
-                'name',
-                'course',
-                'specialisation',
+                'number',
+                'course' => ['label' => 'Курс', 'value' => $model->getCourse()],
+                'specialisation' => ['label' => 'Направление', 'value' => $model->specialisation->name],
                 'start_date',
+                'faculty' => ['label' => 'Факультет', 'value' => $model->faculty->name],
             ],
         ]) ?>
     </div>

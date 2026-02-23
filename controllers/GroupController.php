@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Faculty;
 use app\models\Group;
 use app\models\searchModels\GroupSearch;
 use app\models\Specialisation;
@@ -26,7 +27,8 @@ class GroupController extends Controller
         }
 
         $specialisationList = ArrayHelper::map(Specialisation::find()->all(), 'id', 'name');
-        return $this->render('form', ['model' => $model, 'specialisationList' => $specialisationList]);
+        $facultyList = ArrayHelper::map(Faculty::find()->all(), 'id', 'name');
+        return $this->render('form', ['model' => $model, 'specialisationList' => $specialisationList, 'facultyList' => $facultyList]);
     }
 
     public function actionView($id)
@@ -50,6 +52,7 @@ class GroupController extends Controller
             return $this->redirect(['view', 'id' => $model->id]);
         }
         $specialisationList = ArrayHelper::map(Specialisation::find()->all(), 'id', 'name');
-        return $this->render('form', ['model' => $model, 'specialisationList' => $specialisationList]);
+        $facultyList = ArrayHelper::map(Faculty::find()->all(), 'id', 'name');
+        return $this->render('form', ['model' => $model, 'specialisationList' => $specialisationList, 'facultyList' => $facultyList]);
     }
 }
