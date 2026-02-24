@@ -4,9 +4,7 @@ use yii\db\Migration;
 
 class m260219_054833_create_table_students extends Migration
 {
-    /**
-     * {@inheritdoc}
-     */
+
     public function safeUp()
     {
         $this->createTable('student', [
@@ -16,11 +14,11 @@ class m260219_054833_create_table_students extends Migration
             'group_id' => $this->integer(),
             'payment_type_id' => $this->integer(),
         ]);
+
+        $this->addForeignKey('fk_student_group', 'student', 'group_id', 'group', 'id');
     }
 
-    /**
-     * {@inheritdoc}
-     */
+
     public function safeDown()
     {
         $this->dropTable('student');

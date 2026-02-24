@@ -15,6 +15,13 @@ class m260219_061107_create_table_employee extends Migration
             'position_id' => $this->integer()->notNull(),
             'phone' => $this->string(),
         ]);
+        $this->addForeignKey(
+            'fk_employee_position',
+            'employee',
+            'position_id',
+            'position',
+            'id'
+        );
     }
 
     /**

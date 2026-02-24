@@ -9,6 +9,7 @@ use app\models\Specialisation;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\web\Controller;
+use yii\web\NotFoundHttpException;
 
 class GroupController extends Controller
 {
@@ -28,12 +29,19 @@ class GroupController extends Controller
 
         $specialisationList = ArrayHelper::map(Specialisation::find()->all(), 'id', 'name');
         $facultyList = ArrayHelper::map(Faculty::find()->all(), 'id', 'name');
-        return $this->render('form', ['model' => $model, 'specialisationList' => $specialisationList, 'facultyList' => $facultyList]);
+        return $this->render('form', [
+            'model' => $model,
+            'specialisationList' => $specialisationList,
+            'facultyList' => $facultyList,
+        ]);
     }
 
     public function actionView($id)
     {
         $model = Group::findOne($id);
+        if (!$model) {
+            throw new NotFoundHttpException('Group not found');
+        }
         return $this->render('view', ['model' => $model]);
     }
 
@@ -41,6 +49,9 @@ class GroupController extends Controller
     public function actionDelete($id)
     {
         $model = Group::findOne($id);
+        if (!$model) {
+            throw new NotFoundHttpException('Group not found');
+        }
         $model->delete();
         return $this->redirect(['index']);
     }
@@ -48,11 +59,18 @@ class GroupController extends Controller
     public function actionUpdate($id)
     {
          $model = Group::findOne($id);
+        if (!$model) {
+            throw new NotFoundHttpException('Group not found');
+        }
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
         $specialisationList = ArrayHelper::map(Specialisation::find()->all(), 'id', 'name');
         $facultyList = ArrayHelper::map(Faculty::find()->all(), 'id', 'name');
-        return $this->render('form', ['model' => $model, 'specialisationList' => $specialisationList, 'facultyList' => $facultyList]);
+        return $this->render('form', [
+            'model' => $model,
+            'specialisationList' => $specialisationList,
+            'facultyList' => $facultyList,
+        ]);
     }
 }

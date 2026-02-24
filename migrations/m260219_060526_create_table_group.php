@@ -16,6 +16,21 @@ class m260219_060526_create_table_group extends Migration
             'start_date' => $this->string()->notNull(),
             'faculty_id' => $this->integer()->notNull(),
         ]);
+        $this->addForeignKey(
+            'fk_group_specialisation',
+            'group',
+            'specialisation_id',
+            'specialisation',
+            'id'
+        );
+        $this->addForeignKey(
+            'fk_group_faculty',
+            'group',
+            'faculty_id',
+            'faculty',
+            'id'
+        );
+
     }
 
     /**

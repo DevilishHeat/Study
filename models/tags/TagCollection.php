@@ -18,53 +18,24 @@ use function get_class;
 use function preg_match_all;
 use function str_replace;
 
-/**
- * @property BaseGroup[] $groups Группы коллекции
- * @property string|null $language
- * @property BaseParam $params Данные коллекции
- *
- * @property string $descriptionWidget
- */
 class TagCollection extends BaseObject
 {
-    /**
-     * Группы тегов коллекции
-     * @var BaseGroup[] $groups
-     */
     private array $groups = [];
 
-    /**
-     * @var array
-     */
     private array $tagValues = [];
 
-    /**
-     * @var array
-     */
     private array $params = [];
 
-    /**
-     * @return BaseParam[]
-     */
     public function getParams(): array
     {
         return $this->params;
     }
 
-    /**
-     * @param $paramsClass
-     * @return BaseParam|null
-     */
     public function getParam($paramsClass): ?BaseParam
     {
         return $this->params[$paramsClass] ?? null;
     }
 
-    /**
-     * @param array $params
-     * @return object
-     * @throws InvalidConfigException
-     */
     public function setParams(array $params): object
     {
         $this->params = array_map(function ($p) {
@@ -78,11 +49,6 @@ class TagCollection extends BaseObject
         return $this;
     }
 
-    /**
-     * @param array $paramConfig
-     * @return object
-     * @throws InvalidConfigException
-     */
     public function addParam(array $paramConfig): object
     {
         $paramObject = Yii::createObject($paramConfig);
@@ -90,19 +56,11 @@ class TagCollection extends BaseObject
         return $this;
     }
 
-    /**
-     * @return array
-     */
     public function getTagValues(): array
     {
         return $this->tagValues;
     }
 
-    /**
-     * @param array $groupConfig
-     * @return $this
-     * @throws InvalidConfigException
-     */
     public function addGroup(array $groupConfig): object
     {
         /** @var BaseGroup $group */
@@ -116,10 +74,6 @@ class TagCollection extends BaseObject
         return $this;
     }
 
-    /**
-     * @param array $groupsData
-     * @return object
-     */
     public function setGroups(array $groupsData = []): object
     {
         foreach ($groupsData as $groupsDatum) {
@@ -128,17 +82,11 @@ class TagCollection extends BaseObject
         return $this;
     }
 
-    /**
-     * @return BaseGroup[]
-     */
     public function getGroups(): array
     {
         return $this->groups;
     }
 
-    /**
-     * Инициализация значений тегов
-     */
     public function initVariables()
     {
         foreach ($this->groups as $group) {
@@ -160,9 +108,6 @@ class TagCollection extends BaseObject
         return $this;
     }
 
-    /**
-     * Запускает рекурсивную переборку итогового массива до 10 вложенностей
-     */
     private function initRecursive()
     {
         for ($a = 0; $a <= 10; $a++) {
@@ -199,10 +144,6 @@ class TagCollection extends BaseObject
         return $this;
     }
 
-    /**
-     * @param string $text
-     * @return string
-     */
     public function replaceTags(string|null $text): string
     {
         if (!$text) {
@@ -220,21 +161,11 @@ class TagCollection extends BaseObject
         return preg_replace("/{([^}]+)}/u", "", $content);
     }
 
-    /**
-     * @return string
-     * @throws Exception
-     */
     public function getDescriptionWidget(): string
     {
         return TagsDescriptionWidget::widget(['tagCollection' => $this]);
     }
 
-    /**
-     * Поиск объекта поля по его группе и алиасу
-     * @param string $groupClass
-     * @param string $fieldAlias
-     * @return BaseField|null
-     */
     public function getField(string $groupClass, string $fieldAlias): ?BaseField
     {
         return $this->groups[$groupClass]->fields[$fieldAlias] ?? null;

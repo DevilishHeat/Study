@@ -2,47 +2,50 @@
 
 namespace app\controllers;
 
-use app\models\searchModels\FacultySearch;
+use app\models\Employee;
 use app\models\Faculty;
+use app\models\searchModels\EmployeeSearch;
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
-class FacultyController extends Controller
+class EmployeeController extends Controller
 {
     public function actionIndex()
     {
-        $searchModel = new FacultySearch();
+        $searchModel = new EmployeeSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         return $this->render('index', ['dataProvider' => $dataProvider, 'searchModel' => $searchModel]);
     }
 
     public function actionCreate()
     {
-        $model = new Faculty();
+        $model = new Employee();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
-        return $this->render('form', ['model' => $model]);
+
+        $facultyList = ArrayHelper::map(Faculty::find()->all(), 'id', 'name');
+        return $this->render('form', ['model' => $model, 'facultyList' => $facultyList]);
     }
 
     public function actionUpdate($id)
     {
-        $model = Faculty::findOne($id);
-        if (!$model) {
-            throw new NotFoundHttpException('Faculty not found');
-        }
+        $model = Employee::findOne($id);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
-        return $this->render('form', ['model' => $model]);
+
+        $facultyList = ArrayHelper::map(Faculty::find()->all(), 'id', 'name');
+        return $this->render('form', ['model' => $model, 'facultyList' => $facultyList]);
     }
 
     public function actionDelete($id)
     {
-        $model = Faculty::findOne($id);
+        $model = Employee::findOne($id);
         if (!$model) {
-            throw new NotFoundHttpException('Faculty not found');
+            throw new NotFoundHttpException('Employee not found');
         }
         $model->delete();
         return $this->redirect(['index']);
@@ -50,9 +53,9 @@ class FacultyController extends Controller
 
     public function actionView($id)
     {
-        $model = Faculty::findOne($id);
+        $model = Employee::findOne($id);
         if (!$model) {
-            throw new NotFoundHttpException('Faculty not found');
+            throw new NotFoundHttpException('Employee not found');
         }
         return $this->render('view', ['model' => $model]);
     }

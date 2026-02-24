@@ -10,34 +10,15 @@ use yii\base\Exception;
 use yii\base\InvalidConfigException;
 use function array_map;
 
-/**
- * @property TagCollection|null $collection
- * @property string|null $language
- * @property BaseField[] $fields
- */
 abstract class BaseGroup extends BaseObject
 {
 
-    /**
-     * Алиас группы
-     * @var string $alias
-     */
     public string $alias;
 
-    /**
-     * @var BaseField[] $fields
-     */
     private array $fields = [];
 
-    /**
-     * @var TagCollection|null $collection
-     */
     private ?TagCollection $collection = null;
 
-
-    /**
-     * @var string|null $description
-     */
     public string|null $description = null;
 
     public function init()
@@ -51,15 +32,8 @@ abstract class BaseGroup extends BaseObject
 
     abstract public function initGroup();
 
-    /**
-     * Описание конфига полей группы
-     * @return array
-     */
     abstract public function getFieldsConfig(): array;
 
-    /**
-     * @throws InvalidConfigException
-     */
     public function initFields()
     {
         $fieldsConfig = $this->getFieldsConfig();
@@ -72,36 +46,22 @@ abstract class BaseGroup extends BaseObject
         }
     }
 
-    /**
-     * @param TagCollection $collection
-     * @return object
-     */
     public function setCollection(TagCollection $collection): object
     {
         $this->collection = $collection;
         return $this;
     }
 
-    /**
-     * @return TagCollection|null
-     */
     public function getCollection(): ?object
     {
         return $this->collection;
     }
 
-    /**
-     * @return BaseField[]
-     */
     public function getFields(): array
     {
         return $this->fields;
     }
 
-    /**
-     * @param $fields
-     * @return $this
-     */
     public function setFields($fields): object
     {
         $fields = array_map(function ($f) {
@@ -113,10 +73,6 @@ abstract class BaseGroup extends BaseObject
         return $this;
     }
 
-    /**
-     * @param BaseField $field
-     * @return $this
-     */
     public function addField($fieldConfig): object
     {
 
@@ -128,19 +84,11 @@ abstract class BaseGroup extends BaseObject
         return $this;
     }
 
-    /**
-     * @param string $alias
-     * @return object|null
-     */
     public function getField(string $alias): ?object
     {
         return $this->fields[$alias] ?? null;
     }
 
-    /**
-     * @param BaseField $field
-     * @return string|null
-     */
     public function getFieldAlias(BaseField $field): ?string
     {
         if (!($this->fields[$field->alias] ?? null)) {
