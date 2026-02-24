@@ -5,6 +5,7 @@ use app\models\DocumentTemplate;
 use app\models\searchModels\DocumentTemplateSearch;
 use Yii;
 use yii\web\Controller;
+use yii\web\NotFoundHttpException;
 
 class DocumentTemplateController extends Controller
 {
@@ -27,6 +28,10 @@ class DocumentTemplateController extends Controller
     public function actionUpdate($id)
     {
         $model = DocumentTemplate::findOne($id);
+        if (!$model) {
+            throw new NotFoundHttpException('Document template not found');
+        }
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
@@ -37,6 +42,9 @@ class DocumentTemplateController extends Controller
     public function actionDelete($id)
     {
         $model = DocumentTemplate::findOne($id);
+        if (!$model) {
+            throw new NotFoundHttpException('Document template not found');
+        }
         $model->delete();
         return $this->redirect(['index']);
     }
@@ -44,6 +52,9 @@ class DocumentTemplateController extends Controller
     public function actionView($id)
     {
         $model = DocumentTemplate::findOne($id);
+        if (!$model) {
+            throw new NotFoundHttpException('Document template not found');
+        }
         return $this->render('view', ['model' => $model]);
     }
 }

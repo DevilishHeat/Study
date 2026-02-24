@@ -14,6 +14,7 @@ use yii\widgets\ActiveForm;
  */
 
 $form = ActiveForm::begin();
+$this->title = $model->isNewRecord ? 'Добавить студента' : 'Редактировать студента';
 ?>
 
 <div class="row">

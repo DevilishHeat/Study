@@ -12,8 +12,6 @@ class ResultHtmlObject extends ResultObject
         Yii::$app->response->headers->set('Content-Type', 'text/html');
         Yii::$app->response->content = $this->getResult();
         Yii::$app->response->send();
-
-
     }
 
 }

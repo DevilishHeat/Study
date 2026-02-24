@@ -9,16 +9,10 @@ class ResultPdfObject extends ResultObject
 {
 
     public function sendToBrowser($fileName = 'test_pdf.pdf'){
-
-
-
         Yii::$app->response->sendContentAsFile($this->result, $fileName, [
             'inline' => true,
             'mimeType' => 'application/pdf'
         ]);
         Yii::$app->response->send();
-
-
     }
-
 }
